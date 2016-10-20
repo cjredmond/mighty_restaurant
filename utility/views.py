@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views import View
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from utility.models import Profile, Food, Table, Order
@@ -34,7 +34,7 @@ class IndexView(TemplateView):
 
 class FoodCreateView(CreateView):
     model = Food
-    success_url = '/'
+    success_url = reverse_lazy('food_list_view')
     fields = ('food', 'description', 'price')
 
     def form_valid(self, form):
