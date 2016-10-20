@@ -36,3 +36,19 @@ class FoodCreateView(CreateView):
     model = Food
     success_url = '/'
     fields = ('food', 'description', 'price')
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.owner = self.request.user
+        return super().form_valid(form)
+
+class FoodListView(ListView):
+    model = Food
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['object_list'] = Food.objects.all()
+        return context
+
+class ServerView(TemplateView):
+    template_name = "server.html"

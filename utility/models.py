@@ -22,7 +22,6 @@ class Food(models.Model):
     description = models.CharField(max_length=255)
     price = models.FloatField()
     owner = models.ForeignKey('auth.User')
-    order = models.ForeignKey(Order)
 
 
 STATUS = [

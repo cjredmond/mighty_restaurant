@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'food_create_view' %}">Create Food</a>
+
+  <form class="" action="{% url 'food_create_view' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="food" value="" placeholder="Food">
+      <input type="text" name="description" value="" placeholder="Description">
+      <input type="number" step="any" name="price" value="" placeholder="Price">
+      <input type="submit" name="" value="Submit">
+  </form>
+  <hr>
+  <h2>Menu</h2>
+  {% for food in object_list %}
+    <h3>{{ food.food }}</h3>
+    <h4>${{ food.price }}</h4>
+    {{ food.description }}
+    <hr>
+  {% endfor %}
+
+{% endblock %}
