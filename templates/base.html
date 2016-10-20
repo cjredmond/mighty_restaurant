@@ -6,6 +6,10 @@
     <title>Menu</title>
   </head>
   <body>
+    user: {{ request.user }}
+    <a href="{% url 'index_view' %}">Home</a>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'user_create_view' %}">Create User</a>
     {% block content %}
     {% endblock %}
   </body>

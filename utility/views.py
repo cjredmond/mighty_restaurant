@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from utility.models import Profile, Food, Table, Order
@@ -21,7 +21,7 @@ class ProfileUpdateView(UpdateView):
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
 
-class IndexView(View):
+class IndexView(TemplateView):
     template_name = "index.html"
 
 class FoodCreateView(CreateView):
