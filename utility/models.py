@@ -6,13 +6,13 @@ class Table(models.Model):
 class Order(models.Model):
     paid = models.BooleanField(default=False)
     table = models.ForeignKey(Table)
-    notes = models.CharField(max_length=255)
+    notes = models.CharField(max_length=255, null=True, blank=True)
     server = models.ForeignKey('auth.User')
 
 class Food(models.Model):
     food = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    price = models.FloatField() 
+    price = models.FloatField()
     owner = models.ForeignKey('auth.User')
     order = models.ForeignKey(Order)
 
