@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form class="" action="" method="post">
+     {{ form.as_p }}
+     <input type="submit" name="" value="Update">
+     {% csrf_token %}
+ </form>
+
+ {% if request.user.profile.status == 'o' %}
+ {% for x in food %}
+ <h5>{{ x }}</h5>
+ {% endfor %}
+ {% endif %}
+
+ {% if request.user.profile.status == 'c' %}
+ {% for x in order %}
+ <h5>{{ x.table.id }}{{ x.contents }}</h5>
+ {% endfor %}
+ {% endif %}
+{% endblock %}

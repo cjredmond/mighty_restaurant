@@ -18,6 +18,14 @@ class ProfileUpdateView(UpdateView):
     fields = ('status', )
     success_url = reverse_lazy('profile_view')
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        food = Food.objects.all()
+        order = Order.objects.all()
+        context['order'] = order
+        context['food'] = food
+        return context
+
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
 
