@@ -23,3 +23,8 @@ class ProfileUpdateView(UpdateView):
 
 class IndexView(View):
     template_name = "index.html"
+
+class FoodCreateView(CreateView):
+    model = Food
+    success_url = '/'
+    fields = ('food', 'description', 'price')
