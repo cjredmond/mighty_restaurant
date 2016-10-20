@@ -1,3 +1,4 @@
 from django.contrib import admin
+from utility.models import Table, Order, Food, Profile
 
-# Register your models here.
+admin.site.register([Table, Order, Food, Profile])
