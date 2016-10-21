@@ -22,6 +22,7 @@ class Order(models.Model):
     # def contents(self):
     #     return [(food_obj.food, food_obj.description) for food_obj in self.food_set.all()]
 
+
     def __str__(self):
         return str(self.id)
 
@@ -30,8 +31,6 @@ class Food(models.Model):
     food = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     price = models.FloatField()
-    # owner = models.ForeignKey('auth.User')
-    # order = models.ForeignKey(Order)
 
     def __str__(self):
         return self.food

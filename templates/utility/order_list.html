@@ -1,13 +1,17 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
+     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
   </head>
   <body>
     <a href="{% url 'logout' %}">Logout</a> <br>
+    <div class="row">
     {% for order in object_list %}
     {% if not order.finished %}
+
 
     <h5>{{ order.id }}
       {% for x in order.contents %}
@@ -15,13 +19,33 @@
       {% endfor %}
       {{ order.finished }} </h5>
 
-    <form class="" action="{% url 'order_update_view' order.id  %}" method="post">
+<div class="col-md-8">
+    <div class="panel">
+      <div class="panel-body">
+
+    <h3>Order {{ order.id }} {{ order.food }}
+
+    {{ order.finished }} </h3>
+    </div>
+  </div>
+  </div>
+<div class="col-md-4">
+
+
+
+    <form class="" action="{%url 'order_update_view' order.id %}" method="post">
       {% csrf_token %}
+
       <input type="hidden" name="finished" value="True">
       <input type="hidden" name="paid" value="False">
       <input type="submit" name="" value="done">
     </form>
+
+
+      </div>
     {% endif %}
     {% endfor %}
+
+  </div>
   </body>
 </html>

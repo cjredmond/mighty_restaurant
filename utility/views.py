@@ -6,6 +6,7 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from utility.models import Profile, Food, Table, Order
+from utility.forms import CookUpdateOrderForm
 # Create your views here.
 
 class UserCreateView(CreateView):
@@ -23,7 +24,9 @@ class ProfileUpdateView(UpdateView):
         elif self.request.user.profile.status == "c":
             success_url = reverse('cook_view')
         else:
+
             success_url = reverse_lazy('index_view')
+
         return success_url
 
 
@@ -82,8 +85,11 @@ class OrderUpdateView(UpdateView):
     success_url = reverse_lazy('server_view')
     fields = ("finished", "paid")
 
+
 class CookView(ListView):
     model = Order
+
+
 
 class TableDetailView(DetailView):
     model = Table
