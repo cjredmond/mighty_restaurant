@@ -42,6 +42,10 @@ class Profile(models.Model):
     user = models.OneToOneField('auth.User')
     status = models.CharField(max_length=1, choices=STATUS)
 
+    @property
+    def is_server(self):
+        return self.status == 's'
+
 @receiver(post_save, sender=User)
 def create(**kwargs):
     created = kwargs['created']

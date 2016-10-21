@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Table {{ object.id }}</h1>
+
+  {% for order in order_list %}
+    {{ order.id }} {{ order.server }} <br>
+  {% endfor %}
+
+{% endblock %}

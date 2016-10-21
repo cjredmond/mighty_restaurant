@@ -8,7 +8,10 @@
       .btn {
         height:150px;
         width:150px;
+        align-items: center;
+        justify-content: center;
       }
+
     </style>
   </head>
   <body>
@@ -19,6 +22,9 @@
     <a href="{% url 'profile_view' %}">Profile</a>
     <a href="{% url 'food_list_view' %}">Menu</a>
     <a href="{% url 'server_view' %}">Tables</a>
+    {% if request.user.profile.status == 'o' %}
+    <a href="{% url 'food_create_view' %}">Create Food</a>
+    {% endif %}
     {% block content %}
     {% endblock %}
   </body>

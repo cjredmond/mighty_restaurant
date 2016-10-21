@@ -59,6 +59,7 @@ class FoodListView(ListView):
 class ServerView(TemplateView):
     template_name = "server.html"
 
+
 class OrderUpdateView(UpdateView):
     model = Order
     success_url = "/"
@@ -66,3 +67,21 @@ class OrderUpdateView(UpdateView):
 
 class CookView(ListView):
     model = Order
+
+class TableDetailView(DetailView):
+    model = Table
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_list'] = Order.objects.filter(table=self.kwargs['pk'])
+        return context
+
+class OrderCreateView(CreateView):
+    model = Order
+    success_url = reverse_lazy('server_view')
+    fields = ('table', 'server')
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.server = self.request.user
+        return super().form_valid(form)

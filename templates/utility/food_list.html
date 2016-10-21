@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% if request.user.profile.status == 'o' %}
-  <a href="{% url 'food_create_view' %}">Create Food</a>
-
+  <br>
+  <br>
     <form class="" action="{% url 'food_create_view' %}" method="post">
         {% csrf_token %}
         <input type="text" name="food" value="" placeholder="Food">
@@ -11,13 +10,16 @@
         <input type="number" step="any" name="price" value="" placeholder="Price">
         <input type="submit" name="" value="Submit">
     </form>
-  {% endif %}
-  <hr>
+
   <h2>Menu</h2>
+  <hr>
   {% for food in object_list %}
     <h3>{{ food.food }}</h3>
-    <h4>${{ food.price }}</h4>
-    {{ food.description }}
+    <blockquote>
+      <h4>${{ food.price }}</h4>
+      {{ food.description }}
+    </blockquote>
+
     <hr>
   {% endfor %}
 

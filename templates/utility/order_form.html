@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if request.user.profile.is_server %}
+    <h1>Create Order</h1>
+
+    <form class="" action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="" value="Order!">
+    </form>
+  {% endif %}
+{% endblock %}
