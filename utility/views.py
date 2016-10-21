@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView
@@ -16,7 +16,13 @@ class UserCreateView(CreateView):
 class ProfileUpdateView(UpdateView):
     template_name = "profile.html"
     fields = ('status', )
-    success_url = reverse_lazy('profile_view')
+    def get_success_url(self):
+        if self.request.user.profile.status == "o":
+            success_url = reverse_lazy('profile_view')
+        elif self.request.user.profile.status == "c":
+            success_url = reverse('cook_view')
+        return success_url
+
 
     def get_context_data(self):
         context = super().get_context_data()
@@ -52,3 +58,11 @@ class FoodListView(ListView):
 
 class ServerView(TemplateView):
     template_name = "server.html"
+
+class OrderUpdateView(UpdateView):
+    model = Order
+    success_url = "/"
+    fields = ("finished",)
+
+class CookView(ListView):
+    model = Order

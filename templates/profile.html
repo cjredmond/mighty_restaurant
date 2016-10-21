@@ -13,9 +13,5 @@
  {% endfor %}
  {% endif %}
 
- {% if request.user.profile.status == 'c' %}
- {% for x in order %}
- <h5>{{ x.table.id }}{{ x.contents }}</h5>
- {% endfor %}
- {% endif %}
+
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from utility.views import UserCreateView, ProfileUpdateView, IndexView, FoodCreateView, \
-                          FoodListView, ServerView, OrderDetailView
+                          FoodListView, ServerView, OrderUpdateView, CookView #OrderDetailView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^food/create/$', FoodCreateView.as_view(), name='food_create_view'),
     url(r'^food/list/$', FoodListView.as_view(), name='food_list_view'),
     url(r'^server/$', ServerView.as_view(), name='server_view'),
+    url(r'^order/(?P<pk>\d+)/update$', OrderUpdateView.as_view(), name='order_update_view'),
+    url(r'^cook/$', CookView.as_view(), name='cook_view'),
 ]
