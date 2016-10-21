@@ -79,8 +79,8 @@ class ServerView(TemplateView):
 
 class OrderUpdateView(UpdateView):
     model = Order
-    success_url = "/"
-    fields = ("finished",)
+    success_url = reverse_lazy('server_view')
+    fields = ("finished", "paid")
 
 class CookView(ListView):
     model = Order
@@ -96,11 +96,12 @@ class TableDetailView(DetailView):
 class OrderCreateView(CreateView):
     model = Order
     success_url = reverse_lazy('server_view')
-    fields = ('table', 'server', 'food')
+    fields = ('server', 'food')
 
     def form_valid(self, form):
         instance = form.save(commit=False)
-        instance.server = self.request.user
+        target = Table.objects.get(id=self.kwargs['pk'])
+        instance.table = target
         return super().form_valid(form)
 
 class OrderDetailView(DetailView):

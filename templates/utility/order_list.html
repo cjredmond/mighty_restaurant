@@ -8,16 +8,18 @@
     <a href="{% url 'logout' %}">Logout</a> <br>
     {% for order in object_list %}
     {% if not order.finished %}
-    {% for x in order.contents %}
-    {{ order.id }}{{ x }}
-    {% endfor %}
-    <h5>{{ order.id }}{{ order.contents }}{{ order.finished }} </h5>
+
+    <h5>{{ order.id }}
+      {% for x in order.contents %}
+      {{ x }}
+      {% endfor %}
+      {{ order.finished }} </h5>
 
     <form class="" action="{% url 'order_update_view' order.id  %}" method="post">
       {% csrf_token %}
-      <input type="hidden" name="finished" value="true">
+      <input type="hidden" name="finished" value="True">
+      <input type="hidden" name="paid" value="False">
       <input type="submit" name="" value="done">
-
     </form>
     {% endif %}
     {% endfor %}

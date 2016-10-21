@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
 class Table(models.Model):
-    server = models.ForeignKey('auth.User')
+    server = models.ForeignKey('auth.User', null=True, blank=True)
 
 class Order(models.Model):
     paid = models.BooleanField(default=False)
@@ -13,6 +13,10 @@ class Order(models.Model):
     server = models.ForeignKey('auth.User')
     finished = models.BooleanField(default=False)
     food = models.ManyToManyField('utility.Food')
+
+    @property
+    def contents(self):
+        return self.food.all()
 
     # @property
     # def contents(self):
