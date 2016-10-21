@@ -26,6 +26,7 @@ class Order(models.Model):
             total += x.price
         return total
 
+
     # @property
     # def contents(self):
     #     return [(food_obj.food, food_obj.description) for food_obj in self.food_set.all()]
