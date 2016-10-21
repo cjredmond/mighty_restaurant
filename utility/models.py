@@ -18,6 +18,14 @@ class Order(models.Model):
     def contents(self):
         return self.food.all()
 
+    @property
+    def total_price(self):
+        items = self.contents
+        total = 0
+        for x in items:
+            total += x.price
+        return total
+
     # @property
     # def contents(self):
     #     return [(food_obj.food, food_obj.description) for food_obj in self.food_set.all()]
