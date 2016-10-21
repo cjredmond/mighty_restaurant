@@ -16,11 +16,14 @@ class UserCreateView(CreateView):
 class ProfileUpdateView(UpdateView):
     template_name = "profile.html"
     fields = ('status', )
+
     def get_success_url(self):
         if self.request.user.profile.status == "o":
             success_url = reverse_lazy('profile_view')
         elif self.request.user.profile.status == "c":
             success_url = reverse('cook_view')
+        else:
+            success_url = reverse_lazy('index_view')
         return success_url
 
 
@@ -40,21 +43,35 @@ class IndexView(TemplateView):
 
 class FoodCreateView(CreateView):
     model = Food
-    success_url = reverse_lazy('food_list_view')
     fields = ('food', 'description', 'price')
+
+    def get_success_url(self, **kwargs):
+        if self.request.user.profile.is_owner:
+            success_url = reverse_lazy('food_list_view')
+        else:
+            target = Food.objects.last()
+            number = target.order.id
+            success_url = reverse_lazy('order_detail_view', args=[number,])
+        return success_url
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.owner = self.request.user
         return super().form_valid(form)
 
+
 class FoodListView(ListView):
     model = Food
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['object_list'] = Food.objects.all()
-        return context
+    # def get_context_data(self):
+    #     context = super().get_context_data()
+    #     context['object_list'] = Food.objects.filter(owner='o')
+        # admin = User.objects.get(username="admin")
+        # context['object_list'] = Food.objects.filter(owner=admin)
+        # all_food = Food.objects.filter(owner=admin)
+
+
+        # return context
 
 class ServerView(TemplateView):
     template_name = "server.html"
@@ -79,9 +96,23 @@ class TableDetailView(DetailView):
 class OrderCreateView(CreateView):
     model = Order
     success_url = reverse_lazy('server_view')
-    fields = ('table', 'server')
+    fields = ('table', 'server', 'food')
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.server = self.request.user
+        return super().form_valid(form)
+
+class OrderDetailView(DetailView):
+    model = Order
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['food_list'] = Food.objects.filter(order = self.kwargs['pk'])
+        return context
+
+    def form_valid(self, form):
+        instance.form.save(commit=False)
+        instance.server = self.request.user
+        instance.order = self.kwargs['pk']
         return super().form_valid(form)

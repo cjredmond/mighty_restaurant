@@ -4,7 +4,7 @@
   <h1>Table {{ object.id }}</h1>
 
   {% for order in order_list %}
-    {{ order.id }} {{ order.server }} <br>
+    <a href="{% url 'order_detail_view' order.id %}">{{ order.id }}</a> {{ order.server }} <br>
   {% endfor %}
 
 {% endblock %}

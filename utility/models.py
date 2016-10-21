@@ -12,10 +12,11 @@ class Order(models.Model):
     notes = models.CharField(max_length=255, null=True, blank=True)
     server = models.ForeignKey('auth.User')
     finished = models.BooleanField(default=False)
+    food = models.ManyToManyField('utility.Food')
 
-    @property
-    def contents(self):
-        return [(food_obj.food, food_obj.description) for food_obj in self.food_set.all()]
+    # @property
+    # def contents(self):
+    #     return [(food_obj.food, food_obj.description) for food_obj in self.food_set.all()]
 
     def __str__(self):
         return str(self.id)
@@ -25,12 +26,11 @@ class Food(models.Model):
     food = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     price = models.FloatField()
-    owner = models.ForeignKey('auth.User')
-    order = models.ForeignKey(Order)
+    # owner = models.ForeignKey('auth.User')
+    # order = models.ForeignKey(Order)
 
     def __str__(self):
         return self.food
-
 
 STATUS = [
     ('o', 'Owner'),
@@ -41,6 +41,10 @@ STATUS = [
 class Profile(models.Model):
     user = models.OneToOneField('auth.User')
     status = models.CharField(max_length=1, choices=STATUS)
+
+    @property
+    def is_owner(self):
+        return self.status == 'o'
 
     @property
     def is_server(self):

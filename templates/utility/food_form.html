@@ -2,10 +2,11 @@
 
 {% block content %}
   <h1>Create Food Items</h1>
-
+  {% if request.user.profile.is_owner %}
   <form class="" action="" method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="submit" name="" value="Create">
   </form>
+  {% endif %}
 {% endblock %}

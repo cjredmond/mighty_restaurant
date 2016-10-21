@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from utility.views import UserCreateView, ProfileUpdateView, IndexView, FoodCreateView, \
                           FoodListView, ServerView, OrderUpdateView, CookView, OrderCreateView, \
-                          ServerView, TableDetailView
+                          ServerView, TableDetailView, OrderDetailView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^cook/$', CookView.as_view(), name='cook_view'),
     url(r'^table/(?P<pk>\d+)/$', TableDetailView.as_view(), name='table_detail_view'),
     url(r'^order/(?P<pk>\d+)/create/$', OrderCreateView.as_view(), name='order_create_view'),
+    url(r'^order/(?P<pk>\d+)/$', OrderDetailView.as_view(), name='order_detail_view'),
 ]
