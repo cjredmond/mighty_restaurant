@@ -5,6 +5,7 @@
   <a href="{% url 'order_create_view' object.id %}">New Order</a>
 
   <h1>Table {{ object.id }}</h1>
+  <h2> {{ object.checker }}</h2>
 
   {% for order in order_list %}
   {% if not order.paid %}

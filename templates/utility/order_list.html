@@ -7,42 +7,36 @@
      <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
   </head>
   <body>
-    <a href="{% url 'logout' %}">Logout</a> <br>
-    <div class="row">
+
+    <a href="{% url 'index_view' %}">Home</a> <br>
+
+
+
     {% for order in object_list %}
     {% if not order.finished %}
+      <div class="row">
+        <div class="col-md-8">
+            <div class="panel">
+              <div class="panel-body">
 
-
-    <h5>{{ order.id }}
-      {% for x in order.contents %}
-      {{ x }}
-      {% endfor %}
-      {{ order.finished }} </h5>
-
-<div class="col-md-8">
-    <div class="panel">
-      <div class="panel-body">
-
-    <h3>Order {{ order.id }} {{ order.food }}
-
-    {{ order.finished }} </h3>
+ <h3>Order {{ order.id }}
+    {% for x in order.contents %}
+    {{ x }}
+    {% endfor %}
+</h3>
     </div>
   </div>
   </div>
-<div class="col-md-4">
-
-
-
+<div class="col-md-4 finished">
     <form class="" action="{%url 'order_update_view' order.id %}" method="post">
       {% csrf_token %}
-
       <input type="hidden" name="finished" value="True">
       <input type="hidden" name="paid" value="False">
       <input type="submit" name="" value="done">
     </form>
-
-
       </div>
+    </div>
+
     {% endif %}
     {% endfor %}
 

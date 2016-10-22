@@ -6,6 +6,17 @@ from django.contrib.auth.models import User
 class Table(models.Model):
     server = models.ForeignKey('auth.User', null=True, blank=True)
 
+    def __str__(self):
+        return str(self.id)
+
+    def checker(self):
+        active = Order.objects.filter(table = self.id)
+        if active.count()  == 0:
+            return ""
+        else:
+            return "Active"    
+
+
 class Order(models.Model):
     paid = models.BooleanField(default=False)
     table = models.ForeignKey(Table)
@@ -62,6 +73,9 @@ class Profile(models.Model):
     def is_server(self):
         return self.status == 's'
 
+    def __str__(self):
+        show = str(self.user) + " - " + str(self.status)
+        return show
 @receiver(post_save, sender=User)
 def create(**kwargs):
     created = kwargs['created']

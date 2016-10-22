@@ -78,11 +78,21 @@ class FoodListView(ListView):
 
 class ServerView(TemplateView):
     template_name = "server.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tables = Table.objects.all()
+        context['tables'] = tables
+        return context
 
 
 class OrderUpdateView(UpdateView):
     model = Order
-    success_url = reverse_lazy('server_view')
+    def get_success_url(self):
+        if self.request.user.profile.status == "c":
+            success_url = reverse('cook_view')
+        else:
+            success_url = reverse('server_view')
+        return success_url
     fields = ("finished", "paid")
 
 
