@@ -1,4 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>home</h1>
+
+<div class="container">
+<div class="row">
+  <div class="col-md-6">
+  <div class="row add_user">
+  <h3><a href="{% url 'user_create_view' %}">ADD USER</a></h3>
+  </div>
+  <div class="row sign_in">
+    {% if not request.user.is_authenticated %}
+  <h3><a href="{% url 'login' %}">SIGN IN</a></h3>
+  {% else %}
+  <h3><a href="{% url 'profile_view' %}">EDIT PROFILE</a></h3>
+  {% endif %}
+  </div>
+  <div class="row logout">
+  <h3><a href="{% url 'logout' %}">LOGOUT</a></h3>
+  </div>
+
+</div>
+
+
+  <div class="col-md-6" id="right">
+    {% if request.user.profile.status == "c" %}
+<a href="{% url 'cook_view' %}" class="btn btn-info" id="register" role="button">Orders</a>
+
+{% elif request.user.profile.status == "o" %}
+<a href="{% url 'food_list_view' %}" class="btn btn-info" id="register" role="button">Menu</a>
+
+{% elif request.user.profile.status == "s" %}
+<a href="{% url 'server_view' %}" class="btn btn-info" id="register" role="button">Tables</a>
+
+{% else %}
+{% if request.user.is_authenticated %}
+<a href="{% url 'profile_view' %}" class="btn btn-info" id="register" role="button">Register Employee</a>
+{% else %}
+<h2>Please create account or sign in</h2>
+{% endif %}
+{% endif %}
+
+  </div>
+
+</div>
+</div>
+
+
 {% endblock %}

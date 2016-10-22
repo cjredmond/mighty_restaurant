@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Menu</title>
      <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
     <style media="screen">
       .btn {
         height:150px;
@@ -16,16 +17,7 @@
     </style>
   </head>
   <body>
-    user: {{ request.user }}
-    <a href="{% url 'index_view' %}">Home</a>
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'user_create_view' %}">Create User</a>
-    <a href="{% url 'profile_view' %}">Profile</a>
-    <a href="{% url 'food_list_view' %}">Menu</a>
-    <a href="{% url 'server_view' %}">Tables</a>
-    {% if request.user.profile.status == 'o' %}
-    <a href="{% url 'food_create_view' %}">Create Food</a>
-    {% endif %}
+  
     {% block content %}
     {% endblock %}
   </body>

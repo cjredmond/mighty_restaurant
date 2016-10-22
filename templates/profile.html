@@ -1,17 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2><a href="{% url 'index_view'%}">Home</a></h2>
 <form class="" action="" method="post">
      {{ form.as_p }}
      <input type="submit" name="" value="Update">
      {% csrf_token %}
  </form>
 
- {% if request.user.profile.status == 'o' %}
- {% for x in food %}
- <h5>{{ x }}</h5>
- {% endfor %}
- {% endif %}
 
 
 {% endblock %}

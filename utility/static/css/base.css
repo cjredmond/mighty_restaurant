@@ -1,0 +1,37 @@
+#right {
+  background-color: blue;
+  height: 100vh;
+  text-align: center;
+}
+
+.add_user {
+  background: aliceblue;
+  height: 33vh;
+  text-align: center;
+}
+
+.sign_in {
+  background-color: green;
+  height: 33vh;
+  text-align: center;
+}
+
+.logout {
+  background-color: orange;
+  height: 34vh;
+  text-align: center;
+}
+.link {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#register {
+  background-color: red;
+  height: 80vh;
+  width: 50vh;
+  text-align: center;
+  color: black;
+  font-size: 32px;
+  padding-top: 35vh;
+}
