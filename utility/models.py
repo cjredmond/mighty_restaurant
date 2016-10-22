@@ -10,11 +10,12 @@ class Table(models.Model):
         return str(self.id)
 
     def checker(self):
-        active = Order.objects.filter(table = self.id)
+        #active = Order.objects.exclude(paid = True)
+        active = Order.objects.filter(table = self.id, paid=False)
         if active.count()  == 0:
             return ""
         else:
-            return "Active"    
+            return "Active"
 
 
 class Order(models.Model):
