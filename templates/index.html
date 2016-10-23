@@ -15,7 +15,7 @@
   {% endif %}
   </div>
   <div class="row logout">
-  <h3><a href="{% url 'logout' %}">LOGOUT</a></h3>
+  <h3><a href="{% url 'logout' %}?next={% url 'index_view' %}">LOGOUT</a></h3>
   </div>
 
 </div>
@@ -23,19 +23,19 @@
 
   <div class="col-md-6" id="right">
     {% if request.user.profile.status == "c" %}
-<a href="{% url 'cook_view' %}" class="btn btn-info" id="register" role="button">Orders</a>
+<a href="{% url 'cook_view' %}" class="btn btn-info" id="register" role="button"><h1 class="option">Orders</h1></a>
 
 {% elif request.user.profile.status == "o" %}
-<a href="{% url 'food_list_view' %}" class="btn btn-info" id="register" role="button">Menu</a>
+<a href="{% url 'food_list_view' %}" class="btn btn-info" id="register" role="button"><h1 class="option">Menu</h1></a>
 
 {% elif request.user.profile.status == "s" %}
-<a href="{% url 'server_view' %}" class="btn btn-info" id="register" role="button">Tables</a>
+<a href="{% url 'server_view' %}" class="btn btn-info" id="register" role="button"><h1 class="option">Tables</h1></a>
 
 {% else %}
 {% if request.user.is_authenticated %}
-<a href="{% url 'profile_view' %}" class="btn btn-info" id="register" role="button">Register Employee</a>
+<a href="{% url 'profile_view' %}" class="btn btn-info" id="register" role="button"><h1 class="option">Register Employee</h1></a>
 {% else %}
-<h2>Please create account or sign in</h2>
+<h2 class="option">Please create account or sign in</h2>
 {% endif %}
 {% endif %}
 
