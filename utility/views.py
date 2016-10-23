@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.models import User
 from utility.models import Profile, Food, Table, Order
 from utility.forms import CookUpdateOrderForm
-# Create your views here.
+
 
 class UserCreateView(CreateView):
     model = User
@@ -19,14 +19,7 @@ class ProfileUpdateView(UpdateView):
     fields = ('status', )
 
     def get_success_url(self):
-        # if self.request.user.profile.status == "o":
         success_url = reverse_lazy('profile_view')
-        # elif self.request.user.profile.status == "c":
-        #     success_url = reverse('cook_view')
-        # else:
-        #
-        #     success_url = reverse_lazy('index_view')
-
         return success_url
 
 
@@ -87,6 +80,7 @@ class ServerView(TemplateView):
 
 class OrderUpdateView(UpdateView):
     model = Order
+    template_name = "order_update.html"
     def get_success_url(self):
         if self.request.user.profile.status == "c":
             success_url = reverse('cook_view')

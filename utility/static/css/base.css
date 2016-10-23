@@ -38,4 +38,11 @@
 
 .finished {
   background-color: red;
+  color: red;
+}
+#id_status {
+  color: red;
+  font-size: 100px;
+  margin-top: 10px;
+  width: 100px;
 }

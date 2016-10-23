@@ -7,39 +7,36 @@
      <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" media="screen" title="no title">
   </head>
   <body>
+
     <a name="top"></a>
     <a href="{% url 'index_view' %}">Home</a> <br>
 
+<div class="container">
 
+
+
+<div class="row" style="height:10vh;">
+</div>
 
     {% for order in object_list %}
     {% if not order.finished %}
-      <div class="row">
+      <div class="row orders">
         <div class="col-md-8">
             <div class="panel">
               <div class="panel-body">
 
- <h3>Order {{ order.id }}:
-    {% for x in order.contents %}
-    {{ x }}
-    {% endfor %}
-</h3>
-    </div>
-  </div>
-  </div>
+  <a href="{% url 'order_update_view' order.id %}" style="color:blue; font-size:40px;">Order {{ order.id }}:
+  {% for x in order.contents %}
+   |  {{ x }} |
+  {% endfor %}</a>
 
-<div class="col-md-4 finished">
-    <form class="" action="{%url 'order_update_view' order.id %}" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="finished" value="True">
-      <input type="hidden" name="paid" value="False">
-      <input type="submit" name="" value="done">
-    </form>
-      </div>
     </div>
+  </div>
+  </div>
 
     {% endif %}
     {% endfor %}
+  </div>
 
   </div>
   <a href="#Top">Back of Page</a>
