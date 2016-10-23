@@ -46,3 +46,6 @@
   margin-top: 10px;
   width: 100px;
 }
+#order {
+  border: solid black 2px;
+}
