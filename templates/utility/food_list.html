@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<a href="{% url 'index_view' %}">Home</a> <br>
   <br>
   <br>
   {% if request.user.profile.is_owner %}

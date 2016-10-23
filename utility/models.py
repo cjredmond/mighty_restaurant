@@ -31,12 +31,21 @@ class Order(models.Model):
         return self.food.all()
 
     @property
+    def food_tax(self):
+        food_items = self.contents
+        tax = 0
+        for x in food_items:
+            tax += (x.price*0.06)
+        return round(tax, 3)
+
+    @property
     def total_price(self):
         items = self.contents
         total = 0
+        tax = 0
         for x in items:
-            total += x.price
-        return total
+            total += (x.price + (x.price*0.06))
+        return round(total, 2)
 
 
     # @property
