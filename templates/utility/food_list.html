@@ -22,9 +22,9 @@
         <h1 class="text_menu"><b>Menu</b></h1>
         <hr>
         {% for food in object_list %}
-          <h3 class="text_menu"><b>{{ food.food }}</b></h3>
+          <h3 class="text_menu"><b>{{ food.food }}</b></h3> <h4 class="price"><b>${{ food.price }}</b></h4>
           <blockquote>
-            <h4><b>${{ food.price }}</b></h4>
+
             {{ food.description }}
           </blockquote>
           <hr>
