@@ -112,10 +112,11 @@ class TableDetailView(DetailView):
 class OrderCreateView(CreateView):
     model = Order
     success_url = reverse_lazy('server_view')
-    fields = ('server', 'food')
+    fields = ('food',)
 
     def form_valid(self, form):
         instance = form.save(commit=False)
+        instance.server = self.request.user
         target = Table.objects.get(id=self.kwargs['pk'])
         instance.table = target
         return super().form_valid(form)

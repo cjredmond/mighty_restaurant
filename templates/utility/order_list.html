@@ -19,7 +19,7 @@
             <div class="panel">
               <div class="panel-body">
 
- <h3>Order {{ order.id }}
+ <h3>Order {{ order.id }}:
     {% for x in order.contents %}
     {{ x }}
     {% endfor %}
@@ -27,6 +27,7 @@
     </div>
   </div>
   </div>
+
 <div class="col-md-4 finished">
     <form class="" action="{%url 'order_update_view' order.id %}" method="post">
       {% csrf_token %}
