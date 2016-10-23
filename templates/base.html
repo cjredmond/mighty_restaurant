@@ -37,11 +37,16 @@
       .price {
         float: right;
       }
+      .bill {
+        text-decoration: underline;
+        font-family: cursive;
+      }
     </style>
   </head>
   <body>
-
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
   </body>
 </html>
