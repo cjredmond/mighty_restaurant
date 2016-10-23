@@ -9,21 +9,20 @@
         {% csrf_token %}
         <input type="text" name="food" value="" placeholder="Food">
         <input type="text" name="description" value="" placeholder="Description">
-        <input type="number" step="any" name="price" value="" placeholder="Price">
+        <input type="number" step=".01" name="price" value="" placeholder="Price">
         <input type="submit" name="" value="Submit">
     </form>
   {% endif %}
-
-  <h2>Menu</h2>
+  <div class="menu">
+  <h1 class="text_menu"><b>Menu</b></h1>
   <hr>
   {% for food in object_list %}
-    <h3>{{ food.food }}</h3>
+    <h3 class="text_menu"><b>{{ food.food }}</b></h3>
     <blockquote>
-      <h4>${{ food.price }}</h4>
+      <h4><b>${{ food.price }}</b></h4>
       {{ food.description }}
     </blockquote>
-
     <hr>
   {% endfor %}
-
+  </div>
 {% endblock %}
