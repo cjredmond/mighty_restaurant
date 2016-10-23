@@ -14,30 +14,31 @@
 <div class="container">
 
 
-
+  {% for order in object_list %}
+  {% if not order.finished %}
+  {% for x in order.contents %}
 <div class="row" style="height:10vh;">
 </div>
 
-    {% for order in object_list %}
-    {% if not order.finished %}
+
       <div class="row orders">
         <div class="col-md-8">
             <div class="panel">
               <div class="panel-body">
 
-  <a href="{% url 'order_update_view' order.id %}" style="color:blue; font-size:40px;">Order {{ order.id }}:
-  {% for x in order.contents %}
+  <a href="{% url 'order_update_view' order.id %}" style="color:blue; font-size:40px;">Order {{ x.id }}:
+
    |  {{ x }} |
-  {% endfor %}</a>
+  </a>
 
     </div>
   </div>
   </div>
 
+  </div>
+  {% endfor %}
     {% endif %}
     {% endfor %}
-  </div>
-
   </div>
   <a href="#Top">Back of Page</a>
   </body>
