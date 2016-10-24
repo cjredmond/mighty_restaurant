@@ -1,6 +1,6 @@
 #right {
-  background-color: blue;
-  height: 100vh;
+//  background-color: blue;
+//  height: 100vh;
   text-align: center;
 }
 
@@ -27,13 +27,14 @@
 }
 
 #register {
-  background-color: red;
-  height: 80vh;
-  width: 50vh;
+  background-color: blue;
+  height: 100vh;
+  width: 90vh;
   text-align: center;
   color: black;
   font-size: 32px;
   padding-top: 35vh;
+  vertical-align: middle;
 }
 
 .finished {
