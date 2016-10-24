@@ -34,7 +34,7 @@
 {% if request.user.is_authenticated %}
 <a href="{% url 'profile_view' %}" class="btn btn-info" id="register" role="button"><h1 class="option">Register Employee</h1></a>
 {% else %}
-<h2 class="option">Please create account or sign in</h2>
+<h2>Please create account or sign in</h2>
 {% endif %}
 {% endif %}
 
