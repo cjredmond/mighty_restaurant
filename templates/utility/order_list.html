@@ -9,36 +9,38 @@
   <body>
 
     <a name="top"></a>
-    <a href="{% url 'index_view' %}">Home</a> <br>
-
-<div class="container">
 
 
-  {% for order in object_list %}
-  {% if not order.finished %}
-<div class="row" style="height:10vh;">
-</div>
+    <div class="container">
+      <a href="{% url 'index_view' %}">Home</a> <br>
 
+      {% for order in object_list %}
+      {% if not order.finished %}
+    <div class="row" style="height:10vh;">
+    </div>
 
+    
       <div class="row orders">
         <div class="col-md-8">
-            <div class="panel">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h2>Order {{ order.id }}:</h2>
+              </div>
+
               <div class="panel-body">
+                <a href="{% url 'order_update_view' order.id %}" style="color:blue; font-size:40px;">
+                {% for x in order.contents %}
+                   {{ x }} |
+                {% endfor %}</a>
+              </div>
 
-  <a href="{% url 'order_update_view' order.id %}" style="color:blue; font-size:40px;">Order {{ order.id }}:
-  {% for x in order.contents %}
-   |  {{ x }} |
-  {% endfor %}</a>
+            </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <a href="#Top">Top of Page</a>
+      </div>
 
-    </div>
-  </div>
-  </div>
-
-
-  </div>
-  {% endif %}
-  {% endfor %}
-  </div>
-  <a href="#Top">Top of Page</a>
   </body>
 </html>
