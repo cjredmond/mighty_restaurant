@@ -17,12 +17,14 @@
           <h3> <a href="{% url 'order_detail_view' order.id %}">Order: {{ order.id }}</a> <br>Server: {{ order.server }}</h3>
           </div>
           <div class="col-md-4">
+            {% if order.finished == True %}
             <form class="" action="{% url 'order_update_view' order.id %}" method="post">
               {% csrf_token %}
               <input type="hidden" name="paid" value="True">
               <input type="hidden" name="finished" value="True">
               <input type="submit" style="width:20vh; height:15vh;"name="" value="paid">
               </form>
+              {% endif %}
           </div>
 
                 </div>
